@@ -9,6 +9,6 @@ Since BuddyPress objects (groups, activity, messages etc.) are not WordPress cus
 
 /wp-json/buddypress/activity will return an unfiltered stream of BuddyPress activity.  
 /wp-json/buddypress/activity/34 will return a single activity item.  
-/wp-json/buddypress/activity/34/delete will delete this item.  
+/wp-json/buddypress/activity/USERNAME will return single user activity  
 
 
