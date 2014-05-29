@@ -1,7 +1,7 @@
 #BUDDYPRESS REST API
 BuddyPress JSON Api endpoints for https://github.com/WP-API/WP-API
 
-THIS IS A WORK IN PROGRESS!!!
+THIS IS A WORK IN PROGRESS!!! currently doesn't do anything. I am doing each BuddyPress component at a time starting with activity.
 
 ## Documentation
 
