@@ -67,7 +67,7 @@ class BP_API_Activity {
 	 * @access public
 	 * @return void
 	 */
-	public function get_activity( $id = '', $user = '', $scope = '', $page = 1, $per_page = '', $search_terms = '' ) {
+	public function get_activity( $id = '', $user = '', $scope = '', $page = '', $per_page = '', $search_terms = '' ) {
 		global $bp;
 
 		$activities = array();
