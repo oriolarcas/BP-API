@@ -7,4 +7,4 @@ THIS IS A WORK IN PROGRESS!!! currently doesn't do anything. I am doing each Bud
 
 Read the [plugin's documentation][docs].
 
-[docs]: https://github.com/modemlooper/bp-api/tree/master/docs
+[docs]: https://github.com/modemlooper/BP-API/wiki
