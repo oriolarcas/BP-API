@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: BuddyPress json API
+Plugin Name: BP API
 Plugin URI: https://github.com/modemlooper/bp-api
 Description: json API for BuddyPress. This plugin creates json api endpoints for https://github.com/WP-API
 Author: modemlooper, djpaul
