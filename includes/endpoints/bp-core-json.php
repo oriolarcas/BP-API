@@ -1,10 +1,10 @@
 <?php
 /**
- * BuddyPress API core.
+ * BP API core.
  *
  * core api endpoints.
  *
- * @package BuddyPress
+ * @package bp
  */
 
 // Exit if accessed directly
@@ -13,7 +13,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * bp_api_core_init function.
  *
- * initializes api class for core and creates endpoint. Returns basic info about BuddyPress install.
+ * initializes api class for core and creates endpoint. Returns basic info about a BuddyPress install.
  * 
  * @access public
  * @return void
@@ -41,7 +41,7 @@ class BP_API_Core{
      * @return void
      */
     public function register_routes( $routes ) {
-        $routes['/buddypress'] = array(
+        $routes['/bp'] = array(
             array( array( $this, 'get_core'), WP_JSON_Server::READABLE ),
         );
 

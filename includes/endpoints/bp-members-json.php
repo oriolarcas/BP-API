@@ -1,10 +1,10 @@
 <?php
 /**
- * BuddyPress API members.
+ * BP API members.
  *
  * members api endpoints.
  *
- * @package BuddyPress
+ * @package BP
  */
 
 // Exit if accessed directly
@@ -33,11 +33,11 @@ add_action( 'wp_json_server_before_serve', 'bp_api_members_init' );
 class BP_API_Members {
 
     public function register_routes( $routes ) {
-        $routes['/buddypress/members'] = array(
+        $routes['/bp/members'] = array(
             array( array( $this, 'get_members'), WP_JSON_Server::READABLE ),
             array( array( $this, 'create_member'), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
         );
-        $routes['/buddypress/members/(?P<id>\d+)'] = array(
+        $routes['/bp/members/(?P<id>\d+)'] = array(
             array( array( $this, 'get_member'), WP_JSON_Server::READABLE ),
             array( array( $this, 'edit_member'), WP_JSON_Server::EDITABLE | WP_JSON_Server::ACCEPT_JSON ),
             array( array( $this, 'delete_member'), WP_JSON_Server::DELETABLE ),

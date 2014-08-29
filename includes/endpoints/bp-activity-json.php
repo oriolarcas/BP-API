@@ -1,10 +1,10 @@
 <?php
 /**
- * BuddyPress API Activity.
+ * bp API Activity.
  *
  * Activity api endpoints.
  *
- * @package BuddyPress
+ * @package bp
  */
 
 // Exit if accessed directly
@@ -23,6 +23,7 @@ function bp_api_activity_init() {
 
 	$bp_api_activity = new BP_API_Activity();
 	add_filter( 'json_endpoints', array( $bp_api_activity, 'register_routes' ) );
+
 }
 add_action( 'wp_json_server_before_serve', 'bp_api_activity_init' );
 
@@ -41,20 +42,9 @@ class BP_API_Activity {
 	 * @return void
 	 */
 	public function register_routes( $routes ) {
-		$routes['/buddypress/activity'] = array(
-			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE ),
-			array( array( $this, 'create_activity'), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
-		);
-		$routes['/buddypress/activity/(?P<id>\d+)'] = array(
-			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE ),
-			array( array( $this, 'edit_activity'), WP_JSON_Server::EDITABLE | WP_JSON_Server::ACCEPT_JSON ),
-			array( array( $this, 'delete_activity'), WP_JSON_Server::DELETABLE ),
-		);
-		$routes['/buddypress/activity/(?P<user>\w+)'] = array(
-			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE ),
-		);
-		$routes['/buddypress/activity/scope/(?P<scope>\w+)'] = array(
-			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE ),
+	
+		$routes['/bp/activity'] = array(
+			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE )
 		);
 
 		return $routes;
@@ -67,23 +57,12 @@ class BP_API_Activity {
 	 * @access public
 	 * @return void
 	 */
-	public function get_activity( $id = '', $user = '', $scope = '', $page = '', $per_page = '', $search_terms = '' ) {
+	public function get_activity() {
 		global $bp;
+				
+		$args = $_GET;
 
-		$activities = array();
-		
-		$user = get_userdatabylogin( $user );
-		
-		$arg = array(
-			'user_id' => $user->ID,
-			'include' => $id,
-			'scope'   => $scope,
-			'page'    => $page,
-			'per_page' => $per_page,
-			'search_terms' => $search_terms
-		);
-
-		if ( bp_has_activities( $arg ) ) {
+		if ( bp_has_activities( $args ) ) {
 
 			while ( bp_activities() ) {
 
@@ -112,14 +91,14 @@ class BP_API_Activity {
 
 			}
 
-			return wp_send_json( $response );
+			return $response;
 		} else {
 			return wp_send_json_error();
 		}
 
 
 	}
-
+	
 	public function create_activity() {
 		return 'create activity';
 	}

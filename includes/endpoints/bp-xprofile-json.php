@@ -1,10 +1,10 @@
 <?php
 /**
- * BuddyPress API xprofile.
+ * BP API xprofile.
  *
  * xprofile api endpoints.
  *
- * @package BuddyPress
+ * @package BP
  */
 
 // Exit if accessed directly
@@ -33,11 +33,11 @@ add_action( 'wp_json_server_before_serve', 'bp_api_xprofile_init' );
 class BP_API_Xprofile {
 
     public function register_routes( $routes ) {
-        $routes['/buddypress/xprofile'] = array(
+        $routes['/bp/xprofile'] = array(
             array( array( $this, 'get_xprofile'), WP_JSON_Server::READABLE ),
             array( array( $this, 'create_field'), WP_JSON_Server::CREATABLE | WP_JSON_Server::ACCEPT_JSON ),
         );
-        $routes['/buddypress/xprofile/(?P<id>\d+)'] = array(
+        $routes['/bp/xprofile/(?P<id>\d+)'] = array(
             array( array( $this, 'get_field'), WP_JSON_Server::READABLE ),
             array( array( $this, 'edit_field'), WP_JSON_Server::EDITABLE | WP_JSON_Server::ACCEPT_JSON ),
             array( array( $this, 'delete_field'), WP_JSON_Server::DELETABLE ),
