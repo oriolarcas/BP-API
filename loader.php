@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: BuddyPress json API
-Plugin URI: https://github.com/modemlooper/buddypress-json-api
+Plugin URI: https://github.com/modemlooper/bp-api
 Description: json API for BuddyPress. This plugin creates json api endpoints for https://github.com/WP-API
-Author: modemlooper
+Author: modemlooper, djpaul
 Version: 0.1
-Author URI: http://twitter.com/modemlooper
+Author URI: https://github.com/modemlooper/bp-api
 */
 
 // Define a constant that can be checked to see if the component is installed or not.
