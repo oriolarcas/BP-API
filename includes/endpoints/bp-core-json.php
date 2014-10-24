@@ -59,20 +59,19 @@ class BP_API_Core{
      * @access public
      * @return json
      */
-    public function get_core() {
-    	global $bp;
+	public function get_core() {
+		global $bp;
 
-        $core = array(
-            'version'            => $bp->version,
-            'active_components'  => $bp->active_components,
-            'directory_page_ids' => bp_core_get_directory_page_ids(),
-        );
-    
-    	$response = new WP_JSON_Response();
-        $response->set_data( $core );
-        
-        return $response;
-    }
-      
+		$core = array(
+			'version'            => $bp->version,
+			'active_components'  => $bp->active_components,
+			'directory_page_ids' => bp_core_get_directory_page_ids(),
+		);
+
+		$response = new WP_JSON_Response();
+		$response->set_data( $core );
+
+		return $response;
+	}
     
 }
