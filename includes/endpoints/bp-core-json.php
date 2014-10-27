@@ -41,11 +41,15 @@ class BP_API_Core{
      * @return void
      */
     public function register_routes( $routes ) {
-        $routes['/bp'] = array(
-            array( array( $this, 'get_core'), WP_JSON_Server::READABLE ),
-        );
 
-        return $routes;
+         $post_routes = array(
+			// Post endpoints
+			'/bp'           => array(
+				array( array( $this, 'get_core' ), WP_JSON_Server::READABLE ),
+			),
+		);
+
+		return $post_routes;
     }
     
     
@@ -55,17 +59,19 @@ class BP_API_Core{
      * @access public
      * @return json
      */
-    public function get_core() {
-    	global $bp;
-    
-    	$response = array();
-    	
-    	$response['version'] = $bp->version;
-    	$response['active_components'] = $bp->active_components;
-    	$response['directory_page_ids'] = bp_core_get_directory_page_ids();
-    	
-	    return wp_send_json( $response );
-    }
-      
+	public function get_core() {
+		global $bp;
+
+		$core = array(
+			'version'            => $bp->version,
+			'active_components'  => $bp->active_components,
+			'directory_page_ids' => bp_core_get_directory_page_ids(),
+		);
+
+		$response = new WP_JSON_Response();
+		$response->set_data( $core );
+
+		return $response;
+	}
     
 }
