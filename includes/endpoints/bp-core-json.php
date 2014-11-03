@@ -26,7 +26,6 @@ function bp_api_core_init() {
 }
 add_action( 'wp_json_server_before_serve', 'bp_api_core_init' );
 
-
 /**
  * BP_API_Core class.
  */
@@ -41,15 +40,11 @@ class BP_API_Core{
      * @return void
      */
     public function register_routes( $routes ) {
-
-         $post_routes = array(
-			// Post endpoints
-			'/bp'           => array(
-				array( array( $this, 'get_core' ), WP_JSON_Server::READABLE ),
-			),
+		$routes['/bp'] = array(
+			array(array( $this, 'get_core' ), WP_JSON_Server::READABLE )
 		);
 
-		return $post_routes;
+		return $routes;
     }
     
     

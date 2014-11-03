@@ -30,13 +30,23 @@ if ( ! in_array( 'buddypress/bp-loader.php', apply_filters( 'active_plugins', ge
  * @access public
  * @return void
  */
+/**
+ * Loads component into the $bp global
+ *
+ */
+function bp_api_load_core_component() {
+	if ( version_compare( BP_VERSION, '2.0', '>' ) )
+		require_once( dirname( __FILE__ ) . '/includes/bp-api-loader.php' );
+}
+add_action( 'bp_setup_components', 'bp_api_load_core_component', 6 );
+/*
 function bp_api_init() {
 	// requires BP 2.0 or greater.
 	if ( version_compare( BP_VERSION, '2.0', '>' ) )
 		require( dirname( __FILE__ ) . '/includes/bp-api-loader.php' );
 }
 add_action( 'bp_include', 'bp_api_init' );
-
+*/
 
 /**
  * bp_api_activate function.

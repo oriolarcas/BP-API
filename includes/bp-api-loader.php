@@ -26,12 +26,6 @@ class BP_API_Component extends BP_Component {
 			BP_API_PLUGIN_DIR
 		);
 
-		/**
-		 * BuddyPress-dependent plugins are loaded too late to depend on BP_Component's
-		 * hooks, so we must call the function directly.
-		 */
-		 $this->includes();
-
 	}
 
 
@@ -47,33 +41,21 @@ class BP_API_Component extends BP_Component {
 		// Files to include
 		$includes = array(
 			'includes/endpoints/bp-activity-json.php',
-			'includes/endpoints/bp-blogs-json.php',
-			'includes/endpoints/bp-messages-json.php',
+			  //'includes/endpoints/bp-blogs-json.php',
+			  //'includes/endpoints/bp-messages-json.php',
 			'includes/endpoints/bp-members-json.php',
-			'includes/endpoints/bp-settings-json.php',
+			  //'includes/endpoints/bp-settings-json.php',
 			'includes/endpoints/bp-xprofile-json.php',
-			'includes/endpoints/bp-notifications-json.php',
-			'includes/endpoints/bp-forums-json.php',
-			'includes/endpoints/bp-friends-json.php',
+			  //'includes/endpoints/bp-notifications-json.php',
+			  //'includes/endpoints/bp-forums-json.php',
+			  //'includes/endpoints/bp-friends-json.php',
 			'includes/endpoints/bp-core-json.php',
-			'includes/endpoints/bp-groups-json.php'
+			  //'includes/endpoints/bp-groups-json.php'
 		);
 
 		parent::includes( $includes );
 
 	}
-
-
 }
 
-
-/**
- * Loads component into the $bp global
- *
- */
-function bp_api_load_core_component() {
-	global $bp;
-
-	$bp->api = new BP_API_Component;
-}
-add_action( 'bp_loaded', 'bp_api_load_core_component' );
+buddypress()->api = new BP_API_Component;
