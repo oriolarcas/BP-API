@@ -50,7 +50,7 @@ class BP_API_Component extends BP_Component {
 			  //'includes/endpoints/bp-forums-json.php',
 			  //'includes/endpoints/bp-friends-json.php',
 			'includes/endpoints/bp-core-json.php',
-			  //'includes/endpoints/bp-groups-json.php'
+			'includes/endpoints/bp-groups-json.php'
 		);
 
 		parent::includes( $includes );
