@@ -43,13 +43,17 @@ class BP_API_Activity {
 	 */
 	public function register_routes( $routes ) {
 	
-		$routes['/bp/activity'] = array(
-			array( array( $this, 'get_activity'), WP_JSON_Server::READABLE )
-		);
+		$activity_routes = array(
+			'/bp/activity' => array(
+				array( array( $this, 'get_activity_all'), WP_JSON_Server::READABLE ) ),
+			'/bp/activity/groups' => array(
+				array( array( $this, 'get_activity_groups'), WP_JSON_Server::READABLE ) ),
+			'/bp/activity/mentions' => array(
+				array( array( $this, 'get_activity_groups'), WP_JSON_Server::READABLE ) )
+			);
 
-		return $routes;
+		return array_merge($routes, $activity_routes);
 	}
-
 
 	/**
 	 * get_activity function.
@@ -57,10 +61,8 @@ class BP_API_Activity {
 	 * @access public
 	 * @return void
 	 */
-	public function get_activity() {
+	private function get_activity($args) {
 		global $bp;
-				
-		$args = $_GET;
 
 		if ( bp_has_activities( $args ) ) {
 
@@ -97,6 +99,18 @@ class BP_API_Activity {
 		}
 
 
+	}
+	
+	public function get_activity_all() {
+		return $this->get_activity(array('scope' => 'all'));
+	}
+	
+	public function get_activity_groups() {
+		return $this->get_activity(array('scope' => 'groups'));
+	}
+	
+	public function get_activity_mentions() {
+		return $this->get_activity(array('scope' => 'mentions'));
 	}
 	
 	public function create_activity() {

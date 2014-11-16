@@ -43,11 +43,14 @@ class BP_API_Groups {
 	 */
 	public function register_routes( $routes ) {
 	
-		$routes['/bp/groups'] = array(
-			array( array( $this, 'get_groups'), WP_JSON_Server::READABLE )
+		$group_routes = array(
+			'/bp/groups' => array(
+				array( array( $this, 'get_all_groups'), WP_JSON_Server::READABLE ) ),
+			'/bp/groups/user/(?P<uid>\d+)' => array(
+				array( array( $this, 'get_user_groups'), WP_JSON_Server::READABLE ) )
 		);
 
-		return $routes;
+		return array_merge($routes, $group_routes);
 	}
 
 
@@ -57,17 +60,18 @@ class BP_API_Groups {
 	 * @access public
 	 * @return void
 	 */
-	public function get_groups() {
+	private function get_groups($args) {
 		global $bp;
 		
-		if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
+		if ( bp_has_groups( $args ) ) {
 		
 			$response = array();
-			while ( bp_groups() ) {
+			while ( bp_groups( $args ) ) {
 			
 				bp_the_group();
 
 				$group = array(
+					'id' => bp_get_group_id(),
 					'name' => bp_get_group_name(),
 					'permalink' => bp_get_group_permalink(),
 					'type' => bp_get_group_type(),
@@ -84,6 +88,14 @@ class BP_API_Groups {
 		
 	}
 	
+	public function get_all_groups() {
+		return $this->get_groups();
+	}
+	
+	public function get_user_groups($uid) {
+		return $this->get_groups(array('user_id' => $uid));
+	}
+
 	public function create_group() {
 		return 'create group';
 	}
